@@ -2,7 +2,7 @@ package server.util;
 
 public class TenantContextHolder {
 
-    private static final String DEFAULT_TENANT_ID = "HEROKU_POSTGRESQL_TEAL_URL";
+    private static final String DEFAULT_TENANT_ID = "DATABASE_URL";
 
     private static final ThreadLocal<String> CONTEXT
             = new ThreadLocal<String>() {
