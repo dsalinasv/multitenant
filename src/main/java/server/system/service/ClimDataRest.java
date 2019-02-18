@@ -25,12 +25,12 @@ public class ClimDataRest {
     }
     
     @GetMapping
-    public Iterable<ClimData> getAll() {
+    public Iterable<ClimData> getAll(@RequestHeader String tenantId) {
         return repo.findAll();
     }
     
     @PostMapping
-    public void save(@RequestBody ClimData entity) {
+    public void save(@RequestBody ClimData entity, @RequestHeader String tenantId) {
         repo.save(entity);
     }
     
