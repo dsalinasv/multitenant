@@ -27,7 +27,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 
     @Override
     protected DataSource selectDataSource(String tenantId) {
-        if (!dataSourceMap.containsKey(tenantId) && dataSourceMap.get(tenantId) != null) {
+        if (!dataSourceMap.containsKey(tenantId) || dataSourceMap.get(tenantId) == null) {
             dataSourceMap.put(tenantId, DataSourceUtil
                     .createAndConfigureDataSource(tenantId));
         }
