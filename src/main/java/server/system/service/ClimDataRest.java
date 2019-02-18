@@ -24,6 +24,11 @@ public class ClimDataRest {
         return repo.getByYear(year);
     }
     
+    @GetMapping
+    public Iterable<ClimData> getAll() {
+        return repo.findAll();
+    }
+    
     @PostMapping
     public void save(@RequestBody ClimData entity) {
         repo.save(entity);
