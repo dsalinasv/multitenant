@@ -17,6 +17,5 @@ public class ClimData implements Serializable {
     private String fecha;
     private Double temp;
     private Double eto;  
-    private Character tipo;
 
 }

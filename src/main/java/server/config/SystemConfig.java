@@ -2,7 +2,6 @@ package server.config;
 
 import server.util.DataSourceUtil;
 import server.util.TenantContextHolder;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManagerFactory;
@@ -30,8 +29,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SystemConfig {
 
     @Bean(destroyMethod = "close")
-    public DataSource dataSource() throws URISyntaxException {
-        return DataSourceUtil.createAndConfigureDataSource(TenantContextHolder.getTenant());
+    public DataSource dataSource() {
+        return DataSourceUtil.createAndConfigureDataSource(
+                TenantContextHolder.getTenant());
     }
 
     @Bean
@@ -50,8 +50,8 @@ public class SystemConfig {
             MultiTenantConnectionProvider connectionProvider,
             CurrentTenantIdentifierResolver tenantResolver,
             JpaVendorAdapter jpaVendorAdapter) {
-        LocalContainerEntityManagerFactoryBean em = 
-                new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean em
+                = new LocalContainerEntityManagerFactoryBean();
         em.setPackagesToScan("server.system.domain");
         em.setPersistenceUnitName("system-persistence-unit");
         Map<String, Object> properties = new HashMap<>();
@@ -63,7 +63,7 @@ public class SystemConfig {
         properties.put(
                 org.hibernate.cfg.Environment.MULTI_TENANT_IDENTIFIER_RESOLVER,
                 tenantResolver);
-        properties.put(org.hibernate.cfg.Environment.DIALECT, 
+        properties.put(org.hibernate.cfg.Environment.DIALECT,
                 "org.hibernate.dialect.PostgreSQL95Dialect");
         properties.put(org.hibernate.cfg.Environment.SHOW_SQL, false);
         properties.put(org.hibernate.cfg.Environment.FORMAT_SQL, true);
@@ -72,5 +72,5 @@ public class SystemConfig {
         em.setJpaPropertyMap(properties);
         return em;
     }
-    
+
 }
