@@ -22,8 +22,8 @@ public class DataSourceUtil {
         ds.setJdbcUrl(dbUrl);
         ds.setDriverClassName("org.postgresql.Driver");
         ds.setConnectionTimeout(20000);
-        ds.setMinimumIdle(10);
-        ds.setMaximumPoolSize(20);
+        ds.setMinimumIdle(1);        
+        ds.setMaximumPoolSize(10);
         ds.setIdleTimeout(300000);
         ds.setConnectionTimeout(20000);
         ds.setPoolName(tenantId + "-connection-pool");
